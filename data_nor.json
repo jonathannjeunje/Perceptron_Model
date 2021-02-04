@@ -1,0 +1,11 @@
+{
+    "input": [
+        [0, 0], 
+        [0, 1], 
+        [1, 0], 
+        [1, 1]],
+    "target_output": [1, 0, 0 , 0],
+    "original_weight": [0.9, 0.8],
+    "learning_coefficient": 0.7,
+    "threshold": -1.5
+}
