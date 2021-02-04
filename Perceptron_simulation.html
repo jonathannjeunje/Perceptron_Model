@@ -13113,6 +13113,13 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Perceptron-Simulation">Perceptron Simulation<a class="anchor-link" href="#Perceptron-Simulation">&#182;</a></h1>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
@@ -13129,7 +13136,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">actual_output_fn</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">current_weight</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
@@ -13146,6 +13153,13 @@ div#notebook {
         <span class="n">new_weight</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_weight</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">learning_coefficient</span> <span class="o">*</span> <span class="p">(</span><span class="n">target_output</span> <span class="o">-</span> <span class="n">actual_output</span><span class="p">)</span> <span class="o">*</span> <span class="nb">input</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">new_weight</span>
 
+<span class="k">def</span> <span class="nf">weight_change_fn</span><span class="p">(</span><span class="n">current_weight</span><span class="p">,</span> <span class="n">updated_weight</span><span class="p">):</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_weight</span><span class="p">)</span>
+    <span class="n">weight_change</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">size</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+        <span class="n">weight_change</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">updated_weight</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">current_weight</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">weight_change</span>
+
 <span class="k">def</span> <span class="nf">perceptron_simulation</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">current_weight</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;original_weight&quot;</span><span class="p">]</span>
     <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">])</span>
@@ -13159,7 +13173,19 @@ div#notebook {
             <span class="n">actual_output</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">actual_output_fn</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">current_weight</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;threshold&quot;</span><span class="p">])</span>
             <span class="n">updated_weight</span> <span class="o">=</span> <span class="n">new_weight_fn</span><span class="p">(</span><span class="n">current_weight</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;learning_coefficient&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;target_output&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">actual_output</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
 
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;current_weight:&quot;</span><span class="p">,</span> <span class="n">current_weight</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">actual_output:&quot;</span><span class="p">,</span> <span class="n">actual_output</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">updated_weight:&quot;</span><span class="p">,</span> <span class="n">updated_weight</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    target_output: </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">                    actual_output: </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">                    current_weight: </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">                    weight_change: </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">                    current_weight: </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">                &quot;&quot;&quot;</span> <span class="o">%</span><span class="p">(</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;target_output&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">actual_output</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                    <span class="n">current_weight</span><span class="p">,</span>
+                    <span class="n">weight_change_fn</span><span class="p">(</span><span class="n">current_weight</span><span class="p">,</span> <span class="n">updated_weight</span><span class="p">),</span>
+                    <span class="n">updated_weight</span><span class="p">)</span>
+                    <span class="p">)</span>
             <span class="n">current_weight</span> <span class="o">=</span> <span class="n">updated_weight</span>
 
         <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span>
@@ -13176,16 +13202,14 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Training data and Initial parameters</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data_or.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="n">data_or</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data_nor.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="n">data_nor</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data_3.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> <span class="n">data_3</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">data_or</span><span class="p">)</span>
-<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">data_nor</span><span class="p">)</span>
-<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">data_3</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">data_or</span><span class="p">);</span> <span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">data_nor</span><span class="p">);</span> <span class="n">pp</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">data_3</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13234,7 +13258,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">perceptron_simulation</span><span class="p">(</span><span class="n">data_or</span><span class="p">)</span>
@@ -13256,94 +13280,154 @@ div#notebook {
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Epoque 1 : 
-current_weight: [0.9, 0.8] 
-actual_output: 0 
-updated_weight: [0.9, 0.8] 
 
-current_weight: [0.9, 0.8] 
-actual_output: 0 
-updated_weight: [0.9, 1.5] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [0.9, 0.8]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [0.9, 0.8]
+                
 
-current_weight: [0.9, 1.5] 
-actual_output: 0 
-updated_weight: [1.6, 1.5] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [0.9, 0.8]
+                    weight_change: [0.0, 0.7]
+                    current_weight: [0.9, 1.5]
+                
 
-current_weight: [1.6, 1.5] 
-actual_output: 1 
-updated_weight: [1.6, 1.5] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [0.9, 1.5]
+                    weight_change: [0.7000000000000001, 0.0]
+                    current_weight: [1.6, 1.5]
+                
 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.6, 1.5]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [1.6, 1.5]
+                
 
 Epoque 2 : 
-current_weight: [1.6, 1.5] 
-actual_output: 0 
-updated_weight: [1.6, 1.5] 
 
-current_weight: [1.6, 1.5] 
-actual_output: 0 
-updated_weight: [1.6, 2.2] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.6, 1.5]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [1.6, 1.5]
+                
 
-current_weight: [1.6, 2.2] 
-actual_output: 0 
-updated_weight: [2.3, 2.2] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [1.6, 1.5]
+                    weight_change: [0.0, 0.7000000000000002]
+                    current_weight: [1.6, 2.2]
+                
 
-current_weight: [2.3, 2.2] 
-actual_output: 1 
-updated_weight: [2.3, 2.2] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [1.6, 2.2]
+                    weight_change: [0.6999999999999997, 0.0]
+                    current_weight: [2.3, 2.2]
+                
 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [2.3, 2.2]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [2.3, 2.2]
+                
 
 Epoque 3 : 
-current_weight: [2.3, 2.2] 
-actual_output: 0 
-updated_weight: [2.3, 2.2] 
 
-current_weight: [2.3, 2.2] 
-actual_output: 0 
-updated_weight: [2.3, 2.9000000000000004] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [2.3, 2.2]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [2.3, 2.2]
+                
 
-current_weight: [2.3, 2.9000000000000004] 
-actual_output: 0 
-updated_weight: [3.0, 2.9000000000000004] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [2.3, 2.2]
+                    weight_change: [0.0, 0.7000000000000002]
+                    current_weight: [2.3, 2.9000000000000004]
+                
 
-current_weight: [3.0, 2.9000000000000004] 
-actual_output: 1 
-updated_weight: [3.0, 2.9000000000000004] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [2.3, 2.9000000000000004]
+                    weight_change: [0.7000000000000002, 0.0]
+                    current_weight: [3.0, 2.9000000000000004]
+                
 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [3.0, 2.9000000000000004]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [3.0, 2.9000000000000004]
+                
 
 Epoque 4 : 
-current_weight: [3.0, 2.9000000000000004] 
-actual_output: 0 
-updated_weight: [3.0, 2.9000000000000004] 
 
-current_weight: [3.0, 2.9000000000000004] 
-actual_output: 0 
-updated_weight: [3.0, 3.6000000000000005] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [3.0, 2.9000000000000004]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [3.0, 2.9000000000000004]
+                
 
-current_weight: [3.0, 3.6000000000000005] 
-actual_output: 0 
-updated_weight: [3.7, 3.6000000000000005] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [3.0, 2.9000000000000004]
+                    weight_change: [0.0, 0.7000000000000002]
+                    current_weight: [3.0, 3.6000000000000005]
+                
 
-current_weight: [3.7, 3.6000000000000005] 
-actual_output: 1 
-updated_weight: [3.7, 3.6000000000000005] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [3.0, 3.6000000000000005]
+                    weight_change: [0.7000000000000002, 0.0]
+                    current_weight: [3.7, 3.6000000000000005]
+                
 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [3.7, 3.6000000000000005]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [3.7, 3.6000000000000005]
+                
 
 Epoque 5 : 
-current_weight: [3.7, 3.6000000000000005] 
-actual_output: 0 
-updated_weight: [3.7, 3.6000000000000005] 
 
-current_weight: [3.7, 3.6000000000000005] 
-actual_output: 1 
-updated_weight: [3.7, 3.6000000000000005] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [3.7, 3.6000000000000005]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [3.7, 3.6000000000000005]
+                
 
-current_weight: [3.7, 3.6000000000000005] 
-actual_output: 1 
-updated_weight: [3.7, 3.6000000000000005] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [3.7, 3.6000000000000005]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [3.7, 3.6000000000000005]
+                
 
-current_weight: [3.7, 3.6000000000000005] 
-actual_output: 1 
-updated_weight: [3.7, 3.6000000000000005] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [3.7, 3.6000000000000005]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [3.7, 3.6000000000000005]
+                
 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [3.7, 3.6000000000000005]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [3.7, 3.6000000000000005]
+                
 </pre>
 </div>
 </div>
@@ -13354,7 +13438,7 @@ updated_weight: [3.7, 3.6000000000000005]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">perceptron_simulation</span><span class="p">(</span><span class="n">data_nor</span><span class="p">)</span>
@@ -13376,76 +13460,124 @@ updated_weight: [3.7, 3.6000000000000005]
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Epoque 1 : 
-current_weight: [0.9, 0.8] 
-actual_output: 1 
-updated_weight: [0.9, 0.8] 
 
-current_weight: [0.9, 0.8] 
-actual_output: 1 
-updated_weight: [0.9, 0.10000000000000009] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [0.9, 0.8]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [0.9, 0.8]
+                
 
-current_weight: [0.9, 0.10000000000000009] 
-actual_output: 1 
-updated_weight: [0.20000000000000007, 0.10000000000000009] 
+                    target_output: 0
+                    actual_output: 1
+                    current_weight: [0.9, 0.8]
+                    weight_change: [0.0, -0.7]
+                    current_weight: [0.9, 0.10000000000000009]
+                
 
-current_weight: [0.20000000000000007, 0.10000000000000009] 
-actual_output: 1 
-updated_weight: [-0.4999999999999999, -0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 1
+                    current_weight: [0.9, 0.10000000000000009]
+                    weight_change: [-0.7, 0.0]
+                    current_weight: [0.20000000000000007, 0.10000000000000009]
+                
 
+                    target_output: 0
+                    actual_output: 1
+                    current_weight: [0.20000000000000007, 0.10000000000000009]
+                    weight_change: [-0.7, -0.7]
+                    current_weight: [-0.4999999999999999, -0.5999999999999999]
+                
 
 Epoque 2 : 
-current_weight: [-0.4999999999999999, -0.5999999999999999] 
-actual_output: 1 
-updated_weight: [-0.4999999999999999, -0.5999999999999999] 
 
-current_weight: [-0.4999999999999999, -0.5999999999999999] 
-actual_output: 1 
-updated_weight: [-0.4999999999999999, -1.2999999999999998] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [-0.4999999999999999, -0.5999999999999999]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [-0.4999999999999999, -0.5999999999999999]
+                
 
-current_weight: [-0.4999999999999999, -1.2999999999999998] 
-actual_output: 1 
-updated_weight: [-1.1999999999999997, -1.2999999999999998] 
+                    target_output: 0
+                    actual_output: 1
+                    current_weight: [-0.4999999999999999, -0.5999999999999999]
+                    weight_change: [0.0, -0.7]
+                    current_weight: [-0.4999999999999999, -1.2999999999999998]
+                
 
-current_weight: [-1.1999999999999997, -1.2999999999999998] 
-actual_output: 0 
-updated_weight: [-1.1999999999999997, -1.2999999999999998] 
+                    target_output: 0
+                    actual_output: 1
+                    current_weight: [-0.4999999999999999, -1.2999999999999998]
+                    weight_change: [-0.6999999999999998, 0.0]
+                    current_weight: [-1.1999999999999997, -1.2999999999999998]
+                
 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [-1.1999999999999997, -1.2999999999999998]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [-1.1999999999999997, -1.2999999999999998]
+                
 
 Epoque 3 : 
-current_weight: [-1.1999999999999997, -1.2999999999999998] 
-actual_output: 1 
-updated_weight: [-1.1999999999999997, -1.2999999999999998] 
 
-current_weight: [-1.1999999999999997, -1.2999999999999998] 
-actual_output: 1 
-updated_weight: [-1.1999999999999997, -1.9999999999999998] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [-1.1999999999999997, -1.2999999999999998]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [-1.1999999999999997, -1.2999999999999998]
+                
 
-current_weight: [-1.1999999999999997, -1.9999999999999998] 
-actual_output: 1 
-updated_weight: [-1.8999999999999997, -1.9999999999999998] 
+                    target_output: 0
+                    actual_output: 1
+                    current_weight: [-1.1999999999999997, -1.2999999999999998]
+                    weight_change: [0.0, -0.7]
+                    current_weight: [-1.1999999999999997, -1.9999999999999998]
+                
 
-current_weight: [-1.8999999999999997, -1.9999999999999998] 
-actual_output: 0 
-updated_weight: [-1.8999999999999997, -1.9999999999999998] 
+                    target_output: 0
+                    actual_output: 1
+                    current_weight: [-1.1999999999999997, -1.9999999999999998]
+                    weight_change: [-0.7, 0.0]
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                
 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                
 
 Epoque 4 : 
-current_weight: [-1.8999999999999997, -1.9999999999999998] 
-actual_output: 1 
-updated_weight: [-1.8999999999999997, -1.9999999999999998] 
 
-current_weight: [-1.8999999999999997, -1.9999999999999998] 
-actual_output: 0 
-updated_weight: [-1.8999999999999997, -1.9999999999999998] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                
 
-current_weight: [-1.8999999999999997, -1.9999999999999998] 
-actual_output: 0 
-updated_weight: [-1.8999999999999997, -1.9999999999999998] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                
 
-current_weight: [-1.8999999999999997, -1.9999999999999998] 
-actual_output: 0 
-updated_weight: [-1.8999999999999997, -1.9999999999999998] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                
 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                    weight_change: [0.0, 0.0]
+                    current_weight: [-1.8999999999999997, -1.9999999999999998]
+                
 </pre>
 </div>
 </div>
@@ -13456,7 +13588,7 @@ updated_weight: [-1.8999999999999997, -1.9999999999999998]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">perceptron_simulation</span><span class="p">(</span><span class="n">data_3</span><span class="p">)</span>
@@ -13478,106 +13610,178 @@ updated_weight: [-1.8999999999999997, -1.9999999999999998]
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Epoque 1 : 
-current_weight: [0.5, 0.2, 0.6] 
-actual_output: 0 
-updated_weight: [0.5, 0.2, 0.6] 
 
-current_weight: [0.5, 0.2, 0.6] 
-actual_output: 0 
-updated_weight: [0.5, 0.2, 0.6] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [0.5, 0.2, 0.6]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [0.5, 0.2, 0.6]
+                
 
-current_weight: [0.5, 0.2, 0.6] 
-actual_output: 0 
-updated_weight: [0.5, 0.8999999999999999, 0.6] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [0.5, 0.2, 0.6]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [0.5, 0.2, 0.6]
+                
 
-current_weight: [0.5, 0.8999999999999999, 0.6] 
-actual_output: 0 
-updated_weight: [1.2, 1.5999999999999999, 1.2999999999999998] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [0.5, 0.2, 0.6]
+                    weight_change: [0.0, 0.7, 0.0]
+                    current_weight: [0.5, 0.8999999999999999, 0.6]
+                
 
-current_weight: [1.2, 1.5999999999999999, 1.2999999999999998] 
-actual_output: 0 
-updated_weight: [1.2, 1.5999999999999999, 1.2999999999999998] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [0.5, 0.8999999999999999, 0.6]
+                    weight_change: [0.7, 0.7, 0.6999999999999998]
+                    current_weight: [1.2, 1.5999999999999999, 1.2999999999999998]
+                
 
-current_weight: [1.2, 1.5999999999999999, 1.2999999999999998] 
-actual_output: 1 
-updated_weight: [0.5, 1.5999999999999999, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 1.5999999999999999, 1.2999999999999998]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 1.5999999999999999, 1.2999999999999998]
+                
 
-current_weight: [0.5, 1.5999999999999999, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 2.3, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 1
+                    current_weight: [1.2, 1.5999999999999999, 1.2999999999999998]
+                    weight_change: [-0.7, 0.0, -0.7]
+                    current_weight: [0.5, 1.5999999999999999, 0.5999999999999999]
+                
 
-current_weight: [1.2, 2.3, 0.5999999999999999] 
-actual_output: 1 
-updated_weight: [1.2, 2.3, 0.5999999999999999] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [0.5, 1.5999999999999999, 0.5999999999999999]
+                    weight_change: [0.7, 0.7, 0.0]
+                    current_weight: [1.2, 2.3, 0.5999999999999999]
+                
 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.2, 2.3, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 2.3, 0.5999999999999999]
+                
 
 Epoque 2 : 
-current_weight: [1.2, 2.3, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 2.3, 0.5999999999999999] 
 
-current_weight: [1.2, 2.3, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 2.3, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 2.3, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 2.3, 0.5999999999999999]
+                
 
-current_weight: [1.2, 2.3, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 2.3, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 2.3, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 1 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 1
+                    actual_output: 0
+                    current_weight: [1.2, 2.3, 0.5999999999999999]
+                    weight_change: [0.0, 0.7000000000000002, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 1 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 1 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
 Epoque 3 : 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 1 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 1 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 0 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 1 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 0
+                    actual_output: 0
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
-current_weight: [1.2, 3.0, 0.5999999999999999] 
-actual_output: 1 
-updated_weight: [1.2, 3.0, 0.5999999999999999] 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 
+                    target_output: 1
+                    actual_output: 1
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                    weight_change: [0.0, 0.0, 0.0]
+                    current_weight: [1.2, 3.0, 0.5999999999999999]
+                
 </pre>
 </div>
 </div>
@@ -13585,6 +13789,13 @@ updated_weight: [1.2, 3.0, 0.5999999999999999]
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="END.">END.<a class="anchor-link" href="#END.">&#182;</a></h3>
+</div>
+</div>
 </div>
     </div>
   </div>
