@@ -1,0 +1,57 @@
+[
+    {
+        "input": [
+            [0, 0], 
+            [0, 1], 
+            [1, 0], 
+            [1, 1]],
+        "target_output": [0, 1, 1 , 1],
+        "original_weight": [0.9, 0.8],
+        "learning_coefficient": 0.7,
+        "threshold": 3.1
+    }, {
+        "input": [
+            [0, 0], 
+            [0, 1], 
+            [1, 0], 
+            [1, 1]],
+        "target_output": [1, 0, 0 , 0],
+        "original_weight": [0.9, 0.8],
+        "learning_coefficient": 0.7,
+        "threshold": -1.5
+    }, {
+        "input": [
+            [0, 0, 0], 
+            [0, 0, 1], 
+            [0, 1, 0], 
+            [0, 1, 1],
+            [1, 0, 0],
+            [1, 0, 1],
+            [1, 1, 0],
+            [1, 1, 1]],
+        "target_output": [0, 0, 1, 1, 0, 0, 1, 1],
+        "original_weight": [0.5, 0.2, 0.6],
+        "learning_coefficient": 0.7,
+        "threshold": 2.5
+    }, {
+        "input": [
+            [0, 0], 
+            [0, 1], 
+            [1, 0], 
+            [1, 1]],
+        "target_output": [0, 0, 1, 1],
+        "original_weight": [0.1, 0.9],
+        "learning_coefficient": 0.8,
+        "threshold": 1.9
+    }, {
+        "input": [
+            [0, 0], 
+            [0, 1], 
+            [1, 0], 
+            [1, 1]],
+        "target_output": [1, 1, 1, 0],
+        "original_weight": [0.9, 0.5],
+        "learning_coefficient": 0.8,
+        "threshold": -1.6
+    }
+]
